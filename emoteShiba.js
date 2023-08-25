@@ -17,11 +17,11 @@ function fetchImages() {
     });
 }
 
-
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
-const searchResultContainer = document.getElementById('searchResultContainer'); // Get the search result container element
+const searchResultContainer = document.getElementById('searchResultContainer');
 const searchResultImage = document.getElementById('searchResultImage');
+const messageContainer = document.getElementById('messageContainer'); // New message container
 
 searchButton.addEventListener('click', () => {
   const userInput = searchInput.value.trim();
@@ -30,23 +30,33 @@ searchButton.addEventListener('click', () => {
   }
 });
 
+function showMessage(message) {
+  messageContainer.textContent = message;
+  messageContainer.style.display = 'block';
+  setTimeout(() => {
+    messageContainer.textContent = '';
+    messageContainer.style.display = 'none';
+  }, 3000); // Display message for 3 seconds
+}
+
 function searchForTag(tag) {
-  const matchedImageURL = Object.keys(tagDict).find(imageURL =>
-    tagDict[imageURL].toLowerCase() === tag.toLowerCase()
+  const matchedImageURL = Object.keys(tagDict).find(
+    imageURL => tagDict[imageURL].toLowerCase() === tag.toLowerCase()
   );
 
   if (matchedImageURL) {
     displayImageMatrix(matchedImageURL);
     showSearchImage(matchedImageURL);
   } else {
-    alert(`No image associated with the tag: ${tag}`);
+    showMessage(`No image associated with the tag: ${tag}`);
   }
 }
 
 function showSearchImage(imageURL) {
   searchResultImage.src = imageURL;
-  searchResultContainer.style.display = 'block'; // Show the search result container
+  searchResultContainer.style.display = 'block';
 }
+
 
 function displayImageMatrix(highlightedImageURL = null) {
   imageContainer.innerHTML = '';
@@ -75,6 +85,7 @@ function displayImageMatrix(highlightedImageURL = null) {
     imageWrapper.appendChild(image);
     imageGrid.appendChild(imageWrapper);
 
+    
     imageWrapper.addEventListener('click', () => {
       const tag = tagDict[imageURL];
       const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
@@ -106,6 +117,9 @@ function displayImage() {
         displayImage();
       }
     });
+
+    tagInput.focus();
+    
     imageContainer.appendChild(tagInput);
   } else {
     displayTags();
