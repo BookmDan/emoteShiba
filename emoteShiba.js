@@ -1,4 +1,3 @@
-
 const apiUrl = 'https://shibe.online/api/shibes?count=10';
 
 const imageContainer = document.getElementById('imageContainer');
@@ -18,8 +17,11 @@ function fetchImages() {
     });
 }
 
+
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+const searchResultContainer = document.getElementById('searchResultContainer'); // Get the search result container element
+const searchResultImage = document.getElementById('searchResultImage');
 
 searchButton.addEventListener('click', () => {
   const userInput = searchInput.value.trim();
@@ -35,9 +37,15 @@ function searchForTag(tag) {
 
   if (matchedImageURL) {
     displayImageMatrix(matchedImageURL);
+    showSearchImage(matchedImageURL);
   } else {
     alert(`No image associated with the tag: ${tag}`);
   }
+}
+
+function showSearchImage(imageURL) {
+  searchResultImage.src = imageURL;
+  searchResultContainer.style.display = 'block'; // Show the search result container
 }
 
 function displayImageMatrix(highlightedImageURL = null) {
