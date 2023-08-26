@@ -23,6 +23,15 @@ const searchResultContainer = document.getElementById('searchResultContainer');
 const searchResultImage = document.getElementById('searchResultImage');
 const messageContainer = document.getElementById('messageContainer'); // New message container
 
+searchInput.addEventListener('keydown', event => {
+  if (event.key === 'Enter') {
+    const userInput = searchInput.value.trim();
+    if (userInput) {
+      searchForTag(userInput);
+    }
+  }
+});
+
 searchButton.addEventListener('click', () => {
   const userInput = searchInput.value.trim();
   if (userInput) {
