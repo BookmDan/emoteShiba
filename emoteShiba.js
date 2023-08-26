@@ -89,11 +89,15 @@ function displayImageMatrix(highlightedImageURL = null) {
     imageWrapper.addEventListener('click', () => {
       const tag = tagDict[imageURL];
       const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
-      if (userInput === tag) {
-        showSelectedImage(imageURL);
-        displayImageMatrix(imageURL);
+      if (userInput && userInput.trim() !== "" && isTagUnique(userInput)) {
+        if (userInput === tag) {
+          showSelectedImage(imageURL);
+          displayImageMatrix(imageURL);
+        } else {
+          alert('Incorrect tagword. Try again.');
+        }
       } else {
-        alert('Incorrect tagword. Try again.');
+        alert('Invalid tagword. Please enter a non-empty and unique tag.');
       }
     });
   });
@@ -101,7 +105,7 @@ function displayImageMatrix(highlightedImageURL = null) {
 
 
 function displayImage() {
-  if (currentImageIndex < shibaImages.length) {
+  if (currentImageIndex < shibaImages.length && currentImageIndex < 9) {
     const image = document.createElement('img');
     image.src = shibaImages[currentImageIndex];
     imageContainer.innerHTML = '';
@@ -111,10 +115,15 @@ function displayImage() {
     tagInput.placeholder = 'Enter an emotion tag';
     tagInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
-        const tag = tagInput.value;
-        tagDict[shibaImages[currentImageIndex]] = tag;
-        currentImageIndex++;
-        displayImage();
+        event.preventDefault();
+        const tag = tagInput.value.trim(); 
+        if (tag) {
+          tagDict[shibaImages[currentImageIndex]] = tag;
+          currentImageIndex++;
+          displayImage();
+        } else {
+          alert('Please enter a tag.')
+        }
       }
     });
 
@@ -122,45 +131,12 @@ function displayImage() {
     
     imageContainer.appendChild(tagInput);
   } else {
-    displayTags();
+    displayImageMatrix();
   }
 }
 
-function displayTags() {
-  imageContainer.innerHTML = '';
-
-  const imageGrid = document.createElement('div');
-  imageGrid.className = 'image-grid';
-  imageContainer.appendChild(imageGrid);
-
-  shibaImages.slice(0, 9).forEach(imageURL => {
-    const imageWrapper = document.createElement('div');
-    imageWrapper.className = 'image-wrapper';
-
-    const image = document.createElement('img');
-    image.src = imageURL;
-
-    if (tagDict.hasOwnProperty(imageURL)) {
-      const tagDiv = document.createElement('div');
-      tagDiv.className = 'tag';
-      tagDiv.textContent = tagDict[imageURL];
-      imageWrapper.appendChild(tagDiv);
-    }
-
-    imageWrapper.appendChild(image);
-    imageGrid.appendChild(imageWrapper);
-
-    image.addEventListener('click', () => {
-      const tag = tagDict[imageURL];
-      const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
-      if (userInput === tag) {
-        showSelectedImage(imageURL);
-        imageWrapper.classList.add('highlighted'); // Highlight the selected image
-      } else {
-        alert('Incorrect tagword. Try again.');
-      }
-    });
-  });
+function isTagUnique(tag) {
+  return Object.values(tagDict).indexOf(tag) === -1;
 }
 
 fetchImages();
