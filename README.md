@@ -25,6 +25,8 @@ Remember that this is a simplified explanation, and the exact steps may vary bas
 Also, keep in mind that the server might need to be restarted when you make changes to your code for them to take effect.
 Lastly, ensure that the background image and other assets are properly linked using relative paths, as local servers often serve content from different URLs than file-based access.
 
+For the project, we used the following apiURL: 'https://shibe.online/api/shibes?count=10'
+
 ![Screen Shot 2023-08-26 at 10 02 48 AM (2)](https://github.com/BookmDan/emoteShiba/assets/8926023/425eadb9-ad24-4946-ab13-984a14af3e73)
 
 ## <ins>Genesis of Idea:</ins>
