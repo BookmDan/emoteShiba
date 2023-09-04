@@ -21,6 +21,8 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchResultContainer = document.getElementById('searchResultContainer');
 const searchResultImage = document.getElementById('searchResultImage');
+const tagInput = document.getElementById('emoteInput');
+const nextImageButton = document.getElementById('nextImageButton');
 const messageContainer = document.getElementById('messageContainer'); // New message container
 
 searchInput.addEventListener('keydown', event => {
@@ -137,7 +139,15 @@ function displayImage() {
     });
 
     tagInput.focus();
-    
+
+    // Create the "Next Image" button
+    // const nextImageButton = document.createElement('nextImageButton');
+    // nextImageButton.textContent = 'Next Image';
+    // nextImageButton.addEventListener('click', () => {
+    //   displayImage(); // Move to the next image
+    // });
+
+    // Append the input and button elements to the imageContainer    
     imageContainer.appendChild(tagInput);
   } else {
     displayImageMatrix();

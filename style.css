@@ -120,3 +120,14 @@ img {
   border-image: linear-gradient(to bottom, yellow, yellow) 1 100%;
   border-image-slice: 1;
 }
+
+/* Style for the "Next Image" button */
+#nextImageButton {
+  height: 34px; /* Adjust this value to match the input box's height */
+}
+
+#inputContainer {
+  display: flex; /* Display its children side by side */
+  align-items: center; /* Vertically center the children */
+  gap: 10px; /* Add some spacing between the elements */
+}
