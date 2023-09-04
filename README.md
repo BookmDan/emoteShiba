@@ -20,10 +20,9 @@ sh
 Replace http-server or python -m http.server with the actual command based on the server software you're using.
 Access Your Project: Once the server is running, it will display a local URL (like http://localhost:8080) in your terminal. Open a web browser and navigate to this URL to access your project.
 
-Remember that this is a simplified explanation, and the exact steps may vary based on your specific environment. If you're using more advanced development tools like webpack, React, or Vue, the setup might differ.
+If you are using Visual Studio, you can also click 'Go Live' feature on the bottome right-hand corner
+<img width="631" alt="Screen Shot 2023-09-03 at 5 46 27 PM" src="https://github.com/BookmDan/emoteShiba/assets/8926023/2253ba40-e762-4d17-9689-2026da31add5">
 
-Also, keep in mind that the server might need to be restarted when you make changes to your code for them to take effect.
-Lastly, ensure that the background image and other assets are properly linked using relative paths, as local servers often serve content from different URLs than file-based access.
 
 For the project, we used the following apiURL: 'https://shibe.online/api/shibes?count=10'
 
