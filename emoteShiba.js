@@ -4,6 +4,7 @@ const imageContainer = document.getElementById('imageContainer');
 const tagDict = {};
 
 let currentImageIndex = 0;
+let points = 0; 
 
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
@@ -27,6 +28,7 @@ const searchResultImage = document.getElementById('searchResultImage');
 const tagInput = document.getElementById('emoteInput');
 const nextImageButton = document.getElementById('nextImageButton');
 const messageContainer = document.getElementById('messageContainer'); // New message container
+const counter = document.querySelector("#counter");
 
 searchInput.addEventListener('keydown', event => {
   if (event.key === 'Enter') {
@@ -61,6 +63,7 @@ function searchForTag(tag) {
   if (matchedImageURL) {
     displayImageMatrix(matchedImageURL);
     showSearchImage(matchedImageURL);
+    incrementPoints();
   } else {
     showMessage(`No image associated with the tag: ${tag}`);
   }
@@ -194,4 +197,14 @@ function showSelectedImage(imageURL) {
   const selectedImage = document.createElement('img');
   selectedImage.src = imageURL;
   imageContainer.appendChild(selectedImage);
+}
+
+// add point system for everytime you have a successful match 
+const updateCounter = () => {
+  counter.innerText = `You have ${points} points!`
+}
+ 
+const incrementPoints = () => {
+  points++;
+  updateCounter();
 }
