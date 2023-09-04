@@ -100,25 +100,8 @@ function displayImageMatrix(highlightedImageURL = null) {
     imageWrapper.appendChild(image);
     // append image wrapper to image grid
     imageGrid.appendChild(imageWrapper);
-
-    
-    // imageWrapper.addEventListener('click', () => {
-    //   const tag = tagDict[imageURL];
-    //   const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
-    //   if (userInput && userInput.trim() !== "" && isTagUnique(userInput)) {
-    //     if (userInput === tag) {
-    //       showSelectedImage(imageURL);
-    //       displayImageMatrix(imageURL);
-    //     } else {
-    //       alert('Incorrect tagword. Try again.');
-    //     }
-    //   } else {
-    //     alert('Invalid tagword. Please enter a non-empty and unique tag.');
-    //   }
-    // });
   });
 }
-
 
 function displayImage() {
   // for cycling  through 9 images to put tags on
