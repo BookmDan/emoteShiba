@@ -48,4 +48,6 @@ I would like to add more animated features, instead of just highlights. For exam
 
 This turned into more of a game, but I would still like to be able to incorporate this more to sending personalized shiba stickers to friends through an online message portal. More to come...
 
+#Sources: 
+background art_scene https://www.vecteezy.com/vector-art/9956004-pixel-art-arcade-game-scene-with-floating-platform-trees-bridge-and-clouds-8bit-background
 
