@@ -98,12 +98,14 @@ function displayImageMatrix(highlightedImageURL = null) {
     likeButton.className = 'like-button';
     likeButton.innerHTML = `Like! <span class="like-glyph">&#x2661;</span>`;
     imageBox.appendChild(likeButton);
+    const likeGlyph = document.querySelector(".like-glyph");
+    const errorModal = document.querySelector(".error-modal");
 
     likeButton.addEventListener('click', () => {
       mimicServerCall()
         .then(() => {
-          likeButton.classList.add('activated-heart');
-          likeButton.querySelector('.like-glyph').textContent = FULL_HEART;
+          likeGlyph.classList.add('activated-heart');
+          likeGlyph.querySelector('.like-glyph').textContent = FULL_HEART;
         })
         .catch(() => {
           errorModal.classList.remove('hidden');
