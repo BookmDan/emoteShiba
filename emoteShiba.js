@@ -66,7 +66,6 @@ function showSearchImage(imageURL) {
   searchResultContainer.style.display = 'block';
 }
 
-
 function displayImageMatrix(highlightedImageURL = null) {
   // clear content of imageContainer
   imageContainer.innerHTML = '';
@@ -100,6 +99,7 @@ function displayImageMatrix(highlightedImageURL = null) {
     imageWrapper.appendChild(image);
     // append image wrapper to image grid
     imageGrid.appendChild(imageWrapper);
+
   });
 }
 
