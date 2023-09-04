@@ -201,7 +201,13 @@ function showSelectedImage(imageURL) {
 
 // add point system for everytime you have a successful match 
 const updateCounter = () => {
-  counter.innerText = `You have ${points} points!`
+  const pointText = points == 1 ? 'point' : 'points';
+  counter.innerText = `You have ${points} ${pointText}!`;
+  // if (points ==1) {
+  //   counter.innerText = `You have ${points} point!`
+  // } else {
+  //   counter.innerText = `You have ${points} points!`
+  // }
 }
  
 const incrementPoints = () => {
