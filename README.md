@@ -31,22 +31,22 @@ For the project, we used the following apiURL: 'https://shibe.online/api/shibes?
 
 ## <ins>Genesis of Idea:</ins>
 
-I wanted to be able to send different emoji shibas to friends. A challenge I faced was that the api generated randomized image names. Which made it difficult to have a dictionary of images to words. Once a user refreshes, there are completely different images that are generated. 
+I wanted to be able to send different shiba emojis to friends. A challenge I faced was that the api generated randomized image names upon refresh. This made it difficult to have a dictionary of images tied to tags. Once a user refreshes, there are completely different images that are generated. 
 
 Thus, I pivoted to more of a memory challenge game and fun match-making game. By hovering over the image, you can see which tag the user input. Then if you search for that tag, that image is both highlighted and returned on the right. 
 
 ## <ins>Current Bugs:</ins>
-1. when you click images, display alert box pops up
-2. if caption or keyword is non-unique, it does not throw an error
-* only prints the first occurrence of the search. In other words, duplicate images with same keyword does not show
-* error message for if not-matching keyword input does not show
-3. doesn’t erase the previous search keyword, after refresh
-4. tagFocus does not do anything, must mouseclick the input space to enter a tagword for the image
+1. when you click images, display alert box pops up update: fixed :white_check_mark:
+2. if caption or keyword is non-unique, it does not throw an error update: :white_check_mark:
+* only prints the first occurrence of the search. In other words, duplicate images with same keyword does not show :confused:
+* error message for if not-matching keyword input does not show :white_check_mark:
+3. doesn’t erase the previous search keyword, after refresh :x:
+4. tagFocus does not do anything, must mouseclick the input space to enter a tagword for the image :x:
 
 ## <ins>Future</ins>
 
-I would like to add more animated features, instead of just highlights. For example, it might produce stars that appear and then fade, with the selected image shown in prominence and in larger format. The challenge with this is how to return back to the matrix and to be able to search another tagword. 
+I would like to add more animated features, instead of just highlights. For example, it might produce stars that appear and then fade, with the selected image shown in prominence and in larger format. The challenge with this is how to return back to the matrix and to be able to search another tagword. Also, can I add more than one tag word? 
 
-This turned into more of a game, but I would still like to be able to incorporate this more to sending more personalized shiba stickers to friends through an online message portal. More to come...
+This turned into more of a game, but I would still like to be able to incorporate this more to sending personalized shiba stickers to friends through an online message portal. More to come...
 
 
