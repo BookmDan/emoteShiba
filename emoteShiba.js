@@ -68,52 +68,60 @@ function showSearchImage(imageURL) {
 
 
 function displayImageMatrix(highlightedImageURL = null) {
+  // clear content of imageContainer
   imageContainer.innerHTML = '';
 
   const imageGrid = document.createElement('div');
   imageGrid.className = 'image-grid';
   imageContainer.appendChild(imageGrid);
 
+  // iterate through first 9 images from shibaImages api
   shibaImages.slice(0, 9).forEach(imageURL => {
+    // create container for image
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'image-wrapper';
+    // if current image matches highlighted, then add 'hightlighted' class
     if (imageURL === highlightedImageURL) {
       imageWrapper.classList.add('highlighted');
     }
-
+    // create image elemtn and set source 
     const image = document.createElement('img');
     image.src = imageURL;
 
+    // check if current image url has tag
     if (tagDict.hasOwnProperty(imageURL)) {
+      // create div for tag and set its textContent
       const tagDiv = document.createElement('div');
       tagDiv.className = 'tag';
       tagDiv.textContent = tagDict[imageURL];
       imageWrapper.appendChild(tagDiv);
     }
-
+    // append imageEle to image wrapper
     imageWrapper.appendChild(image);
+    // append image wrapper to image grid
     imageGrid.appendChild(imageWrapper);
 
     
-    imageWrapper.addEventListener('click', () => {
-      const tag = tagDict[imageURL];
-      const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
-      if (userInput && userInput.trim() !== "" && isTagUnique(userInput)) {
-        if (userInput === tag) {
-          showSelectedImage(imageURL);
-          displayImageMatrix(imageURL);
-        } else {
-          alert('Incorrect tagword. Try again.');
-        }
-      } else {
-        alert('Invalid tagword. Please enter a non-empty and unique tag.');
-      }
-    });
+    // imageWrapper.addEventListener('click', () => {
+    //   const tag = tagDict[imageURL];
+    //   const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
+    //   if (userInput && userInput.trim() !== "" && isTagUnique(userInput)) {
+    //     if (userInput === tag) {
+    //       showSelectedImage(imageURL);
+    //       displayImageMatrix(imageURL);
+    //     } else {
+    //       alert('Incorrect tagword. Try again.');
+    //     }
+    //   } else {
+    //     alert('Invalid tagword. Please enter a non-empty and unique tag.');
+    //   }
+    // });
   });
 }
 
 
 function displayImage() {
+  // for cycling  through 9 images to put tags on
   if (currentImageIndex < shibaImages.length && currentImageIndex < 9) {
     const image = document.createElement('img');
 
@@ -121,18 +129,26 @@ function displayImage() {
     imageContainer.innerHTML = '';
     imageContainer.appendChild(image);
 
+    // user input for enter emotion tag
     const tagInput = document.createElement('input');
     tagInput.placeholder = 'Enter an emotion tag';
+
+    //keydown for input element, or pressing 'enter'
     tagInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
         const tag = tagInput.value.trim(); 
-        if (tag) {
+        // check that it is a non-empty and unique tag
+        if (tag && isTagUnique(tag)) {
           tagDict[shibaImages[currentImageIndex]] = tag;
-          currentImageIndex++;
-          displayImage();
+          currentImageIndex++; // move to next image
+          displayImage(); // display next image
         } else {
-          alert('Please enter a tag.')
+          if (!tag) {
+            alert('Please enter a non-empty tag.');
+          } else {
+            alert('Tag must be unique. This tag has already been used.');
+          }
         }
       }
     });
