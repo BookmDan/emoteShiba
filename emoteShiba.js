@@ -5,6 +5,9 @@ const tagDict = {};
 
 let currentImageIndex = 0;
 
+const EMPTY_HEART = '♡'
+const FULL_HEART = '♥'
+
 function fetchImages() {
   fetch(apiUrl)
     .then(response => response.json())
@@ -78,8 +81,10 @@ function displayImageMatrix(highlightedImageURL = null) {
 
   // iterate through first 9 images from shibaImages api
   shibaImages.slice(0, 9).forEach(imageURL => {
+  
     // create container for image
     const imageWrapper = document.createElement('div');
+    const imageBox = document.createElement('div');
     imageWrapper.className = 'image-wrapper';
     // if current image matches highlighted, then add 'hightlighted' class
     if (imageURL === highlightedImageURL) {
@@ -89,6 +94,27 @@ function displayImageMatrix(highlightedImageURL = null) {
     const image = document.createElement('img');
     image.src = imageURL;
 
+    const likeButton = document.createElement('button');
+    likeButton.className = 'like-button';
+    likeButton.innerHTML = `Like! <span class="like-glyph">&#x2661;</span>`;
+    imageBox.appendChild(likeButton);
+
+    likeButton.addEventListener('click', () => {
+      mimicServerCall()
+        .then(() => {
+          likeButton.classList.add('activated-heart');
+          likeButton.querySelector('.like-glyph').textContent = FULL_HEART;
+        })
+        .catch(() => {
+          errorModal.classList.remove('hidden');
+          errorModal.querySelector('p').textContent = 'Server error message';
+          setTimeout(() => {
+            errorModal.classList.add('hidden');
+          }, 3000);
+        });
+    });
+
+    
     // check if current image url has tag
     if (tagDict.hasOwnProperty(imageURL)) {
       // create div for tag and set its textContent
@@ -99,8 +125,9 @@ function displayImageMatrix(highlightedImageURL = null) {
     }
     // append imageEle to image wrapper
     imageWrapper.appendChild(image);
+    imageBox.appendChild(imageWrapper)
     // append image wrapper to image grid
-    imageGrid.appendChild(imageWrapper);
+    imageGrid.appendChild(imageBox);
 
   });
 }
