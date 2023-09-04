@@ -92,8 +92,31 @@ function displayImageMatrix(highlightedImageURL = null) {
     }
 
     imageWrapper.appendChild(image);
-    imageGrid.appendChild(imageWrapper);
 
+    // Create a "like" button for each image
+    const likeButton = document.createElement('button');
+    likeButton.className = 'like-button';
+    likeButton.innerText = 'Like 💖';
+    
+    // Add a click event listener to the "like" button
+    likeButton.addEventListener('click', () => {
+      const tag = tagDict[imageURL];
+      const userInput = prompt(`Enter the tagword associated with this image (${tag}):`);
+      if (userInput && userInput.trim() !== '' && isTagUnique(userInput)) {
+        if (userInput === tag) {
+          showSelectedImage(imageURL);
+          displayImageMatrix(imageURL);
+        } else {
+          alert('Incorrect tagword. Try again.');
+        }
+      } else {
+        alert('Invalid tagword. Please enter a non-empty and unique tag.');
+      }
+    });
+    
+    // Append the "like" button to the image wrapper
+    imageWrapper.appendChild(likeButton);
+    imageGrid.appendChild(imageWrapper);
     
     imageWrapper.addEventListener('click', () => {
       const tag = tagDict[imageURL];
