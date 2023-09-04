@@ -38,7 +38,7 @@ Thus, I pivoted to more of a memory challenge game and fun match-making game. By
 1. when you click images, display alert box pops up update: fixed :white_check_mark:
 2. if caption or keyword is non-unique, it does not throw an error update: :white_check_mark:
 * only prints the first occurrence of the search. In other words, duplicate images with same keyword does not show :confused:
-* error message for if not-matching keyword input does not show :white_check_mark:
+* error message for if not-matching keyword input does not show :x:
 3. doesn’t erase the previous search keyword, after refresh :x:
 4. tagFocus does not do anything, must mouseclick the input space to enter a tagword for the image :x:
 
