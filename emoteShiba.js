@@ -54,8 +54,21 @@ function displayImageGrid(rows) {
       tagOverlay.className = 'tag-overlay';
       tagOverlay.textContent = tag; 
 
-      // function hover() {
-      // }
+      // Add a like button initially hidden
+      const likeButton = document.createElement('div');
+      likeButton.className = 'like-button';
+      likeButton.style.display = 'none';
+      likeButton.innerHTML = '<button id="likeButton">Like</button>';
+
+      // Double-click event to show the like button
+      image.addEventListener('dblclick', (event) => {
+        // Prevent the event from bubbling up to the document click listener
+        event.stopPropagation();
+
+        // Toggle the visibility of the like button within the same image wrapper
+        likeButton.style.display = likeButton.style.display === 'none' ? 'block' : 'none';
+      });
+
       image.addEventListener('mouseenter', () => {
         image.classList.add('highlighted'); 
       });
@@ -64,9 +77,9 @@ function displayImageGrid(rows) {
         image.classList.remove('highlighted'); 
       });
 
-
       imageWrapper.appendChild(image);
       imageWrapper.appendChild(tagOverlay); 
+      imageWrapper.appendChild(likeButton); 
       rowDiv.appendChild(imageWrapper);
     });
 
@@ -79,12 +92,9 @@ function searchForTag(keyword) {
     image.tag.toLowerCase() === keyword.toLowerCase()
   );
 
-  // Remove the highlighting from all images first
   removeHighlightFromImages();
 
   if (matchedImages.length > 0) {
-    // Highlight matched images
-
     matchedImages.forEach((matchedImage) => {
       const imageWrapper = document.querySelector(`.image-wrapper img[alt="${matchedImage.name}"]`);
       if (imageWrapper) {
@@ -92,12 +102,7 @@ function searchForTag(keyword) {
       }
     });
 
-    // Display the first matched image
-
-    // Get the imageURL of the first matched image
     const firstMatchedImageURL = matchedImages[0].imageUrl;
-
-    // Display the first matched image
     showSearchImage(firstMatchedImageURL);
     console.log('Matched images:', matchedImages); 
   } else {
@@ -106,39 +111,11 @@ function searchForTag(keyword) {
   searchInput.value = ""
 }
 
-// function searchForTag(keyword) {
-//   const matchedImages = shibaImages.filter((image) =>
-//     image.tag.toLowerCase() === keyword.toLowerCase()
-//   );
-
-//   if (matchedImages.length > 0) {
-//     // Remove the highlighting from all images first
-//     removeHighlightFromImages();
-
-//     // Highlight matched images
-
-//     // Get the imageURL of the first matched image
-//     const firstMatchedImageURL = matchedImages[0].imageUrl;
-
-//     // Display the first matched image
-//     showSearchImage(firstMatchedImageURL);
-//     // console.log('Matched images:', matchedImages); 
-//   } else {
-//     // If no matches found, display all images without highlighting
-//     removeHighlightFromImages();
-//     // console.log('No matches found.');
-//   }
-//   searchInput.value = ""
-// }
-
-// Function to show the matching image
 function showSearchImage(imageURL) {
-  const searchResultImage = document.getElementById('searchResultImage');
   searchResultImage.src = imageURL;
-  searchResultImage.style.display = 'block';
+  searchResultContainer.style.display = 'block';
 }
 
-// Helper function to remove highlighting from all images
 function removeHighlightFromImages() {
   const images = document.querySelectorAll('.image-wrapper img');
   images.forEach((image) => {
@@ -146,15 +123,23 @@ function removeHighlightFromImages() {
   });
 }
 
-// Helper function to add highlighting to matched images
-function highlightImages(matchedImages) {
-  matchedImages.forEach((matchedImage) => {
-    const image = document.querySelector(`.image-wrapper img[alt="${matchedImage.name}"]`);
-    if (image) {
-      image.classList.add('highlighted');
-    }
-  });
-}
+// // Add this inside your displayImageGrid function after creating the image elements
+// image.addEventListener('dblclick', () => {
+//   const likeButton = imageWrapper.querySelector('.like-button');
+//   if (likeButton) {
+//     likeButton.style.display = 'block';
+//   }
+// });
+
+// // Add this code to hide the like button when clicking anywhere else on the page
+// document.addEventListener('click', (event) => {
+//   const likeButtons = document.querySelectorAll('.like-button');
+//   likeButtons.forEach((likeButton) => {
+//     if (!likeButton.contains(event.target)) {
+//       likeButton.style.display = 'none';
+//     }
+//   });
+// });
 
 
 searchInput.addEventListener('keydown', event => {
@@ -173,45 +158,4 @@ searchButton.addEventListener('click', () => {
   }
 });
 
-function showSearchImage(imageURL) {
-  searchResultImage.src = imageURL;
-  searchResultContainer.style.display = 'block';
-}
-
-
-
-// function displayImage() {
-//   // for cycling  through 9 images to put tags on
-//   if (currentImageIndex < shibaImages.length && currentImageIndex < 9) {
-//     const image = document.createElement('img');
-
-//     image.src = shibaImages[currentImageIndex];
-//     imageContainer.innerHTML = '';
-//     imageContainer.appendChild(image);
-
-//     // user input for enter emotion tag
-//     const tagInput = document.createElement('input');
-//     tagInput.placeholder = 'Enter an emotion tag';
-
-//     //keydown for input element, or pressing 'enter'
-//     tagInput.addEventListener('keydown', function(event) {
-//       if (event.key === 'Enter') {
-//         event.preventDefault();
-//         const tag = tagInput.value.trim(); 
-//         // check that it is a non-empty and unique tag
-//         if (tag && isTagUnique(tag)) {
-//           tagDict[shibaImages[currentImageIndex]] = tag;
-//           currentImageIndex++; // move to next image
-//           displayImage(); // display next image
-//         } else {
-//           if (!tag) {
-//             alert('Please enter a non-empty tag.');
-//           } else {
-//             alert('Tag must be unique. This tag has already been used.');
-//           }
-//         }
-//       }
-//     });
-
-// Call the fetchImages function to load and display the images
 fetchImages();
