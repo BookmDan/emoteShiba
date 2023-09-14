@@ -10,27 +10,24 @@
     <h1 id="title" class="fancy-title">Shiba Emotion Matcher</h1>
   </header>
   <main>
-    <div id="imageContainer"></div>
-    <!-- <div id="inputContainer">
-      <input type="text" id="emoteInput" placeholder="Enter an emotion tag">
-      <button id="nextImageButton">Next Image</button>
-    </div> -->
+    <div id="imageContainer">
+      <div class="image-wrapper">
+        <img src="your-image-url.jpg" alt="Image Description">
+        <!-- Add the 'tag' class to this div -->
+        <div class="tag">Tag Text</div>
+      </div>
+    </div>
     <div id="searchContainer">
       <input type="text" id="searchInput" placeholder="Search by tag">
       <button id="searchButton">Search</button>
     </div>
-    <!-- <div id="searchResultContainer">
-      <h3>Search Result</h3>
-      <img id="searchResultImage" alt="Search Result Image">
-    </div> -->
-    <div id="searchResultContainer" style="display: none;">
-      <img id="searchResultImage" alt="Search Result Image">
+    <div id="searchResultContainer">
+      <img id="searchResultImage" src="" alt="Search Result" style="display: none;">
     </div>
+    
     <div id="counter">You have 0 points! </div>
   </main>
-  <div id= "floatingIsland">
-    <!-- <img src="pixel_art_scene.jpg" alt="Floating Island"> -->
-  </div>
+
   <script defer src="emoteShiba.js"></script>
 </body>
 </html>
