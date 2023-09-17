@@ -1,6 +1,8 @@
 const apiUrl = 'http://localhost:3000/shibas'; 
+// const apiUrl = db.json
 
 let shibaImages = []; // Store the fetched images here
+// let shibaImages = db.shibas
 
 const imageContainer = document.getElementById('imageContainer');
 const searchInput = document.getElementById('searchInput');
