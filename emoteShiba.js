@@ -71,6 +71,13 @@ function displayImageGrid(rows) {
         likeButton.style.display = likeButton.style.display === 'none' ? 'block' : 'none';
       });
 
+      // image.addEventListener('dblclick', handleDoubleClick);
+
+      // function handleDoubleClick(event) {
+      //   // Toggle the visibility of the like button within the same image wrapper
+      //   likeButton.style.display = likeButton.style.display === 'none' ? 'block' : 'none';
+      // }
+
       image.addEventListener('mouseenter', () => {
         image.classList.add('highlighted'); 
       });
@@ -124,25 +131,6 @@ function removeHighlightFromImages() {
     image.classList.remove('highlighted');
   });
 }
-
-// // Add this inside your displayImageGrid function after creating the image elements
-// image.addEventListener('dblclick', () => {
-//   const likeButton = imageWrapper.querySelector('.like-button');
-//   if (likeButton) {
-//     likeButton.style.display = 'block';
-//   }
-// });
-
-// // Add this code to hide the like button when clicking anywhere else on the page
-// document.addEventListener('click', (event) => {
-//   const likeButtons = document.querySelectorAll('.like-button');
-//   likeButtons.forEach((likeButton) => {
-//     if (!likeButton.contains(event.target)) {
-//       likeButton.style.display = 'none';
-//     }
-//   });
-// });
-
 
 searchInput.addEventListener('keydown', event => {
   if (event.key === 'Enter') {
